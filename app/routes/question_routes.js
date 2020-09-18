@@ -9,14 +9,14 @@ const requireOwnership = errors.requireOwnership
 const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
-// router.post('/userquestions', (req, res, next) => {
-//   Questions.find({ owner: req.body.ownerquestion })
-//     .then(questions => {
-//       return questions.map(question => question.toObject())
-//     })
-//     .then(questions => res.status(200).json({ questions: questions }))
-//     .catch(next)
-// })
+router.get('/userquestions',requireToken, (req, res, next) => {
+  Questions.find({ owner: req.user.id })
+    .then(questions => {
+      return questions.map(question => question.toObject())
+    })
+    .then(questions => res.status(200).json({ questions: questions }))
+    .catch(next)
+})
 
 // INDEX
 router.get('/questions', (req, res, next) => {
