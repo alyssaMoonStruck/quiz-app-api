@@ -2,8 +2,8 @@
 
 ## Important Links
 
-1. 
-2.
+1. Quiz App Browser Repo: https://github.com/alyssaMoonStruck/quiz-app-browser
+2. Quiz App: https://alyssamoonstruck.github.io/quiz-app-browser/
 
 ## Planning Story
 
