@@ -77,4 +77,12 @@ router.delete('/questions/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+
+router.get('/questions/quiz/:num', requireToken, (req, res, next) => {
+    Questions.aggregate().sample(parseInt(req.params.num))
+      .then(handle404)
+      .then(questions => res.status(200).json({ questions: questions }))
+      .catch(next)
+  })
+
 module.exports = router
