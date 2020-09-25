@@ -77,11 +77,18 @@ router.delete('/questions/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+const shuffle = (array) => {
+  return array.sort(() => Math.random() - 0.5);
+}
 
 router.get('/questions/quiz/:num', requireToken, (req, res, next) => {
-    Questions.aggregate().sample(parseInt(req.params.num))
+    Questions.aggregate().sample( parseInt(req.params.num))
       .then(handle404)
-      .then(questions => res.status(200).json({ questions: questions }))
+      .then(questions => {
+        questions.forEach(q => shuffle(q.answers));
+        //questions.map(q => shuffle(q.answers));
+        res.status(200).json({ questions: questions })
+      })
       .catch(next)
   })
 
